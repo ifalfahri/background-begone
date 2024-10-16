@@ -1,0 +1,10 @@
+{
+    "builds": [
+      { "src": "package.json", "use": "@vercel/node" },
+      { "src": "api/app.py", "use": "@vercel/python"}
+    ],
+    "routes": [
+      { "src": "/api/remove-background", "dest": "api/app.py" },
+      { "src": "/(.*)", "dest": "/$1" }
+    ]
+}

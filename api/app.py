@@ -7,7 +7,7 @@ import io
 app = Flask(__name__)
 CORS(app)
 
-@app.route('/remove-background', methods=['POST'])
+@app.route('/api/remove-background', methods=['POST'])
 def remove_background():
     if 'image' not in request.files:
         return 'No image file uploaded', 400
@@ -28,4 +28,4 @@ def remove_background():
     return send_file(img_byte_arr, mimetype='image/png')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

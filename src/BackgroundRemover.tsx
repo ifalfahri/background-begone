@@ -91,9 +91,9 @@ export default function BackgroundRemover() {
     formData.append('image', file)
 
     setIsLoading(true)
-    axios.post('http://localhost:5000/remove-background', formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
-      responseType: 'blob'
+    axios.post('/api/remove-background', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        responseType: 'blob'
     })
     .then(response => {
       setProcessedImage(URL.createObjectURL(response.data))

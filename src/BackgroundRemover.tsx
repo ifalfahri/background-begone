@@ -34,12 +34,14 @@ const translations = {
     downloadImage: 'Download Image',
     processing: 'Processing',
     error: 'An error occurred while processing the image.',
-    madeWithLove: 'Made with love by ifalfahri',
+    madeWithLove: 'Made with',
+    love: 'love',
+    by: 'by',
     starOnGithub: 'Star on GitHub',
     about: 'About',
     contact: 'Contact',
-    aboutContent: 'Background Begone is a simple tool to remove backgrounds from images using AI.',
-    contactContent: 'For any inquiries, please contact us at contact@backgroundbegone.com',
+    aboutContent: 'Background Begone is a simple tool to remove backgrounds from images using AI. PS : That cute logo is also made by me.',
+    contactContent: 'For any inquiries, please contact me at ifalfahri16@gmail.com',
     tiktokContact: 'or kindly DM me on TikTok @aldofiondhy',
   },
   id: {
@@ -53,13 +55,15 @@ const translations = {
     downloadImage: 'Unduh Gambar',
     processing: 'Memproses',
     error: 'Terjadi kesalahan saat memproses gambar.',
-    madeWithLove: 'Dibuat dengan cinta oleh ifalfahri',
-    starOnGithub: 'Beri Bintang di GitHub',
+    madeWithLove: 'Dibuat dengan',
+    love: 'cinta',
+    by: 'oleh',
+    starOnGithub: 'Kasih Star di GitHub',
     about: 'Tentang',
     contact: 'Kontak',
-    aboutContent: 'Background Begone adalah alat sederhana untuk menghapus latar belakang dari gambar menggunakan AI.',
-    contactContent: 'Untuk pertanyaan, silakan hubungi kami di contact@backgroundbegone.com',
-    tiktokContact: 'atau DM aja di TikTok @aldofiondhy',
+    aboutContent: 'Background Begone adalah alat sederhana untuk menghapus latar belakang dari gambar menggunakan AI. Btw logonya saya juga yang buat loh.',
+    contactContent: 'Untuk pertanyaan, silakan hubungi saya di ifalfahri16@gmail.com',
+    tiktokContact: 'atau DM saya di TikTok @aldofiondhy',
   },
 }
 
@@ -109,8 +113,8 @@ export default function BackgroundRemover() {
       link.href = processedImage
       const now = new Date()
       const formattedDate = `${now.getDate().toString().padStart(2, '0')}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getFullYear()}`
-      const formattedTime = `${now.getHours().toString().padStart(2, '0')}.${now.getMinutes().toString().padStart(2, '0')}.${now.getSeconds().toString().padStart(2, '0')}`
-      link.download = `backgroundbegone-${formattedDate}_${formattedTime}.png`
+      const formattedTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`
+      link.download = `backgroundbegone-${formattedDate}-${formattedTime}.png`
       document.body.appendChild(link)
       link.click()
       document.body.removeChild(link)
@@ -145,7 +149,7 @@ export default function BackgroundRemover() {
                 <DialogTitle>{t.contact}</DialogTitle>
                 <DialogDescription>
                   <p>{t.contactContent}</p>
-                  <p className="mt-2">{t.tiktokContact}</p>
+                  <p>{t.tiktokContact}</p>
                 </DialogDescription>
               </DialogHeader>
             </DialogContent>
@@ -251,11 +255,23 @@ export default function BackgroundRemover() {
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
           <p className="flex items-center">
             <Heart className="h-4 w-4 mr-2 text-red-500" />
-            {t.madeWithLove}
+            {t.madeWithLove}{' '}
+            <span className="group mx-1">
+              <span className="transition-colors group-hover:text-red-500">{t.love}</span>
+            </span>
+            {t.by}{' '}
+            <a
+              href="https://github.com/ifalfahri"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1 font-semibold hover:underline"
+            >
+              ifalfahri
+            </a>
           </p>
           <div className="flex items-center mt-4 sm:mt-0">
             <a
-              href="https://github.com/ifalfahri/begone-background"
+              href="https://github.com/ifalfahri/background-begone"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center hover:underline"

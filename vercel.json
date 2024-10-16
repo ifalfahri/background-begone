@@ -1,7 +1,7 @@
 {
     "builds": [
       { "src": "package.json", "use": "@vercel/node" },
-      { "src": "api/app.py", "use": "@vercel/python", "config": { "pythonVersion": "3.10" } }
+      { "src": "api/app.py", "use": "@vercel/python", "config": { "pythonVersion": "3.9" } }
     ],
     "routes": [
       { "src": "/api/remove-background", "dest": "api/app.py" },

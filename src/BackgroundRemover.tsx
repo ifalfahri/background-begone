@@ -24,7 +24,7 @@ type Language = 'en' | 'id'
 
 const translations = {
   en: {
-    title: 'Background Remover',
+    title: '100% Free Background Remover',
     originalImage: 'Original Image',
     processedImage: 'Processed Image',
     dragDrop: 'Drag & drop an image here, or click to select one',
@@ -45,7 +45,7 @@ const translations = {
     tiktokContact: 'or kindly DM me on TikTok @aldofiondhy',
   },
   id: {
-    title: 'Penghapus Latar Belakang',
+    title: 'Penghapus Latar Belakang 100% Gratis',
     originalImage: 'Gambar Asli',
     processedImage: 'Gambar Diproses',
     dragDrop: 'Seret & lepas gambar di sini, atau klik untuk memilih',

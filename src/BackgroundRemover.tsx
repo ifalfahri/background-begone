@@ -89,7 +89,7 @@ export default function BackgroundRemover() {
 
     const formData = new FormData()
     formData.append('image', file)
-
+    
     setIsLoading(true)
     axios.post('/api/remove-background', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -100,6 +100,7 @@ export default function BackgroundRemover() {
       setIsLoading(false)
     })
     .catch(err => {
+      console.log(err)
       setError(t.error)
       setIsLoading(false)
     })

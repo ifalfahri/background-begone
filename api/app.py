@@ -1,11 +1,14 @@
 from flask import Flask, request, send_file
 from flask_cors import CORS
-from rembg import remove
+from rembg import remove, new_session
 from PIL import Image
 import io
 
 app = Flask(__name__)
 CORS(app)
+
+# Create a session with the smaller model
+session = new_session("u2netp")
 
 @app.route('/api/remove-background', methods=['POST'])
 def remove_background():
@@ -17,8 +20,8 @@ def remove_background():
     # Read the image file
     input_image = Image.open(file.stream)
     
-    # Remove the background
-    output_image = remove(input_image)
+    # Remove the background using the smaller model
+    output_image = remove(input_image, session=session)
     
     # Save the result to a byte stream
     img_byte_arr = io.BytesIO()

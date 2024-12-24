@@ -87,23 +87,24 @@ export default function BackgroundRemover() {
     setProcessedImage(null)
     setError(null)
 
-    const formData = new FormData()
-    formData.append('image', file)
-    
-    setIsLoading(true)
-    axios.post('/api/remove-background', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-        responseType: 'blob'
-    })
-    .then(response => {
-      setProcessedImage(URL.createObjectURL(response.data))
-      setIsLoading(false)
-    })
-    .catch(err => {
-      console.log(err)
-      setError(t.error)
-      setIsLoading(false)
-    })
+    const reader = new FileReader()
+    reader.onload = async (event) => {
+      const base64 = event.target?.result
+      if (typeof base64 === 'string') {
+        setIsLoading(true)
+        try {
+          const response = await axios.post('/api/remove-background', base64, {
+            headers: { 'Content-Type': 'text/plain' },
+          })
+          setProcessedImage(`data:image/png;base64,${response.data.image}`)
+        } catch (err) {
+          setError(t.error)
+        } finally {
+          setIsLoading(false)
+        }
+      }
+    }
+    reader.readAsDataURL(file)
   }, [t.error])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: {'image/*': []} })

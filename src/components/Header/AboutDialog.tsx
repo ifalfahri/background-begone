@@ -10,8 +10,8 @@ const AboutDialog: React.FC<DialogProps> = ({ t }) => (
     <DialogContent>
       <DialogHeader>
         <DialogTitle>{t.about}</DialogTitle>
-        <div className="flex flex-col items-center space-y-4">
-          <img src="/placeholder.svg?height=100&width=100" alt="Background Begone Logo" className="w-24 h-24" />
+        <div className="flex flex-col items-center pt-4 space-y-6">
+          <img src="logo.png" alt="Background Begone Logo" className="w-60" />
           <DialogDescription>{t.aboutContent}</DialogDescription>
         </div>
       </DialogHeader>

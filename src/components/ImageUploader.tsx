@@ -22,20 +22,20 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   return (
     <Card className="w-full max-w-4xl">
       <CardHeader>
-        <CardTitle className="text-3xl font-bold text-center">
+        <CardTitle className="text-xl md:text-2xl font-bold text-center">
           {t.title}
         </CardTitle>
       </CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-center">
+          <div className="space-y-2 md:space-y-4">
+            <h2 className="text-md md:text-xl font-semibold text-center">
               {t.originalImage}
             </h2>
             <div
               {...getRootProps()}
               className={cn(
-                "border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors h-[300px] flex items-center justify-center",
+                "border-2 border-dashed rounded-lg p-4 text-center cursor-pointer transition-colors h-48 md:h-[300px] flex items-center justify-center",
                 isDragActive
                   ? "border-primary bg-primary/10"
                   : "border-muted hover:border-primary"
@@ -53,18 +53,18 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
               ) : (
                 <div className="flex flex-col items-center justify-center">
                   <Upload className="h-10 w-10 text-muted-foreground mb-2" />
-                  <p className="text-muted-foreground">{t.dragDrop}</p>
+                  <p className="text-sm md:text-base text-muted-foreground">{t.dragDrop}</p>
                 </div>
               )}
             </div>
           </div>
           <div className="space-y-4">
-            <h2 className="text-xl font-semibold text-center">
+            <h2 className="text-md md:text-xl font-semibold text-center">
               {t.processedImage}
             </h2>
             <div
               className={cn(
-                "border-2 rounded-lg p-4 h-[300px] flex items-center justify-center overflow-hidden",
+                "border-2 rounded-lg p-4 h-48 md:h-[300px] flex items-center justify-center overflow-hidden",
                 processedImage ? "border-primary" : "border-muted"
               )}
             >
@@ -79,7 +79,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
               ) : (
                 <div className="flex flex-col items-center justify-center">
                   <ImageIcon className="h-10 w-10 text-muted-foreground mb-2" />
-                  <p className="text-muted-foreground">
+                  <p className="text-sm md:text-base text-muted-foreground">
                     {t.processedWillAppear}
                   </p>
                 </div>

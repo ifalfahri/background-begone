@@ -20,7 +20,7 @@ const translations = {
       contactContent: 'For any inquiries, please contact me at ifalfahri16@gmail.com',
     },
     id: {
-      title: 'Penghapus Latar Belakang 100% Gratis',
+      title: 'Hapus Latar Belakang 100% Gratis',
       originalImage: 'Gambar Asli',
       processedImage: 'Gambar Diproses',
       dragDrop: 'Seret & lepas gambar di sini, atau klik untuk memilih',

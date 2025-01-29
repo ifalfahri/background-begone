@@ -1,4 +1,5 @@
 import { useDropzone } from "react-dropzone";
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Upload, Image as ImageIcon, Download } from "lucide-react";
@@ -19,8 +20,37 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
     accept: { "image/*": [] },
   });
 
+  const pasteRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handlePaste = (event: ClipboardEvent) => {
+      const items = event.clipboardData?.items;
+      if (items) {
+        for (const item of items) {
+          if (item.type.startsWith("image/")) {
+            const file = item.getAsFile();
+            if (file) {
+              onDrop([file]);
+            }
+          }
+        }
+      }
+    };
+
+    const pasteElement = pasteRef.current;
+    if (pasteElement) {
+      pasteElement.addEventListener("paste", handlePaste);
+    }
+
+    return () => {
+      if (pasteElement) {
+        pasteElement.removeEventListener("paste", handlePaste);
+      }
+    };
+  }, [onDrop]);
+
   return (
-    <Card className="w-full max-w-4xl">
+    <Card ref={pasteRef} className="w-full max-w-4xl">
       <CardHeader>
         <CardTitle className="text-xl md:text-2xl font-bold text-center">
           {t.title}

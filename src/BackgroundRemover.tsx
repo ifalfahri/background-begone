@@ -1,4 +1,4 @@
-import { removeBackground } from "@imgly/background-removal"
+import { removeBackground, preload } from "@imgly/background-removal"
 import { useState, useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Button } from "./components/ui/button"
@@ -21,6 +21,13 @@ import {
 } from "./components/ui/dialog"
 
 type Language = 'en' | 'id'
+
+type ProgressMap = {
+  [key: string]: {
+    current: number;
+    total: number;
+  };
+};
 
 const translations = {
   en: {
@@ -71,15 +78,40 @@ export default function BackgroundRemover() {
   const [originalImage, setOriginalImage] = useState<string | null>(null)
   const [processedImage, setProcessedImage] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [isPreloading, setIsPreloading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [language, setLanguage] = useState<Language>('en')
+  const [downloadProgress, setDownloadProgress] = useState<ProgressMap>({});
+  const t = translations[language]
+
+  
 
   useEffect(() => {
     const userLang = navigator.language || navigator.languages[0]
     setLanguage(userLang.toLowerCase().includes('id') ? 'id' : 'en')
   }, [])
 
-  const t = translations[language]
+  useEffect(() => {
+    const config = {
+      progress: (key: string, current: number, total: number) => {
+        setDownloadProgress(prev => ({
+          ...prev,
+          [key]: { current, total }
+        }));
+      }
+    };
+  
+    preload(config)
+      .then(() => {
+        console.log("Asset preloading succeeded");
+        setIsPreloading(false);
+      })
+      .catch((err: Error) => {
+        console.error("Asset preloading failed:", err);
+        setError(t.error);
+        setIsPreloading(false);
+      });
+  }, [t.error]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0]
@@ -120,6 +152,25 @@ export default function BackgroundRemover() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
+      {isPreloading ? (
+        <div className="flex-grow flex flex-col items-center justify-center space-y-4">
+        <Loader2 className="h-10 w-10 animate-spin text-primary" />
+        {Object.entries(downloadProgress).map(([key, { current, total }]) => (
+          <div key={key} className="flex flex-col items-center">
+            <div className="text-sm text-muted-foreground">
+              {key}: {Math.round((current / total) * 100)}%
+            </div>
+            <div className="w-64 h-2 bg-muted rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-primary transition-all duration-300"
+                style={{ width: `${(current / total) * 100}%` }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+      ) : (
+    <div className="min-h-screen bg-background flex flex-col">
       <nav className="bg-primary text-primary-foreground py-4 px-6 flex justify-between items-center">
         <h1 className="text-2xl font-bold">Background Begone</h1>
         <div className="flex items-center space-x-4">
@@ -145,8 +196,8 @@ export default function BackgroundRemover() {
               <DialogHeader>
                 <DialogTitle>{t.contact}</DialogTitle>
                 <DialogDescription>
-                  <p>{t.contactContent}</p>
-                  <p>{t.tiktokContact}</p>
+                  <span>{t.contactContent}</span>
+                  <span>{t.tiktokContact}</span>
                 </DialogDescription>
               </DialogHeader>
             </DialogContent>
@@ -279,6 +330,8 @@ export default function BackgroundRemover() {
           </div>
         </div>
       </footer>
+    </div>
+  )}
     </div>
   )
 }

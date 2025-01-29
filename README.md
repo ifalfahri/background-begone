@@ -2,10 +2,10 @@
 >Remove backgrounds from your images with ease! 🪄
 
 <div align="center">
-  <img src="public/logo.png" width="200" alt="Background Begone Logo"/>
+  <img src="public/logo.png" width="600" alt="Background Begone Logo"/>
 </div>
 
----
+
 🔴 **[Live Demo](https://bgbegone.vercel.app)** 
 
 ## Features ✨

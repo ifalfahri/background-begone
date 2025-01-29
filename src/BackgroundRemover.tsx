@@ -29,6 +29,16 @@ type ProgressMap = {
   };
 };
 
+const assetNameMapping: Record<string, string> = {
+  'fetch:/models/isnet_fp16': '🧠 Loading AI Brain',
+  'fetch:/onnxruntime-web/ort-wasm-simd-threaded.wasm': '🎨 Loading Artist Skills',
+  'fetch:/onnxruntime-web/ort-wasm-simd-threaded.mjs': '🔮 Loading Magic Powers',
+};
+
+const getFriendlyName = (key: string) => {
+  return assetNameMapping[key] || '📦 Loading Asset';
+};
+
 const translations = {
   en: {
     title: '100% Free Background Remover',
@@ -49,7 +59,6 @@ const translations = {
     contact: 'Contact',
     aboutContent: 'Background Begone is a simple tool to remove backgrounds from images using AI. PS : That cute logo is also made by me.',
     contactContent: 'For any inquiries, please contact me at ifalfahri16@gmail.com',
-    tiktokContact: 'or kindly DM me on TikTok @aldofiondhy',
   },
   id: {
     title: 'Penghapus Latar Belakang 100% Gratis',
@@ -70,7 +79,6 @@ const translations = {
     contact: 'Kontak',
     aboutContent: 'Background Begone adalah alat sederhana untuk menghapus latar belakang dari gambar menggunakan AI. Btw logonya saya juga yang buat loh.',
     contactContent: 'Untuk pertanyaan, silakan hubungi saya di ifalfahri16@gmail.com',
-    tiktokContact: 'atau DM saya di TikTok @aldofiondhy',
   },
 }
 
@@ -156,17 +164,17 @@ export default function BackgroundRemover() {
         <div className="flex-grow flex flex-col items-center justify-center space-y-4">
         <Loader2 className="h-10 w-10 animate-spin text-primary" />
         {Object.entries(downloadProgress).map(([key, { current, total }]) => (
-          <div key={key} className="flex flex-col items-center">
-            <div className="text-sm text-muted-foreground">
-              {key}: {Math.round((current / total) * 100)}%
-            </div>
-            <div className="w-64 h-2 bg-muted rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-primary transition-all duration-300"
-                style={{ width: `${(current / total) * 100}%` }}
-              />
-            </div>
-          </div>
+  <div key={key} className="flex flex-col items-center">
+    <div className="text-sm text-muted-foreground">
+      {getFriendlyName(key)}: {Math.round((current / total) * 100)}%
+    </div>
+    <div className="w-64 h-2 bg-muted rounded-full overflow-hidden">
+      <div 
+        className="h-full bg-primary transition-all duration-300"
+        style={{ width: `${(current / total) * 100}%` }}
+      />
+    </div>
+  </div>
         ))}
       </div>
       ) : (
@@ -196,8 +204,7 @@ export default function BackgroundRemover() {
               <DialogHeader>
                 <DialogTitle>{t.contact}</DialogTitle>
                 <DialogDescription>
-                  <span>{t.contactContent}</span>
-                  <span>{t.tiktokContact}</span>
+                  {t.contactContent}
                 </DialogDescription>
               </DialogHeader>
             </DialogContent>

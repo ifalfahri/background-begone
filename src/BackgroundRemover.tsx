@@ -1,6 +1,6 @@
+import { removeBackground } from "@imgly/background-removal"
 import { useState, useCallback, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone'
-import axios from 'axios'
 import { Button } from "./components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "./components/ui/card"
 import { Loader2, Upload, Image as ImageIcon, Globe, Download, Github, Heart } from "lucide-react"
@@ -86,25 +86,20 @@ export default function BackgroundRemover() {
     setOriginalImage(URL.createObjectURL(file))
     setProcessedImage(null)
     setError(null)
-
-    const reader = new FileReader()
-    reader.onload = async (event) => {
-      const base64 = event.target?.result
-      if (typeof base64 === 'string') {
-        setIsLoading(true)
-        try {
-          const response = await axios.post('/api/remove-background', base64, {
-            headers: { 'Content-Type': 'text/plain' },
-          })
-          setProcessedImage(`data:image/png;base64,${response.data.image}`)
-        } catch (err) {
-          setError(t.error)
-        } finally {
-          setIsLoading(false)
-        }
-      }
-    }
-    reader.readAsDataURL(file)
+    setIsLoading(true)
+  
+    removeBackground(file)
+      .then((blob: Blob) => {
+        const url = URL.createObjectURL(blob)
+        setProcessedImage(url)
+      })
+      .catch((err: Error) => {
+        setError(t.error)
+        console.error(err)
+      })
+      .finally(() => {
+        setIsLoading(false)
+      })
   }, [t.error])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: {'image/*': []} })

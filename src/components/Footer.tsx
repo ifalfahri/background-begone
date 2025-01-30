@@ -12,7 +12,7 @@ const Footer: React.FC<FooterProps> = ({ t }) => (
         </span>
         {t.by}{' '}
         <a
-          href="https://github.com/ifalfahri"
+          href="https://ifal.me"
           target="_blank"
           rel="noopener noreferrer"
           className="ml-1 font-semibold hover:underline"

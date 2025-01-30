@@ -10,7 +10,7 @@ const ContactDialog: React.FC<DialogProps> = ({ t }) => (
     <DialogContent>
       <DialogHeader>
         <DialogTitle>{t.contact}</DialogTitle>
-        <DialogDescription>{t.contactContent}</DialogDescription>
+        <DialogDescription>{t.contactContent} <a href="https://ifal.me">Website</a></DialogDescription>
       </DialogHeader>
     </DialogContent>
   </Dialog>

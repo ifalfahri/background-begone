@@ -1,4 +1,4 @@
-import { removeBackground, preload } from "@imgly/background-removal";
+import { removeBackground, preload, Config } from "@imgly/background-removal";
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -43,7 +43,7 @@ export default function BackgroundRemover() {
       });
   }, [t.error]);
 
-  const config = useMemo(() => ({
+  const config: Config = useMemo(() => ({
     output: {
       quality: 1.0,
     }

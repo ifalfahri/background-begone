@@ -1,5 +1,5 @@
 import { removeBackground, preload } from "@imgly/background-removal";
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ImageUploader from '@/components/ImageUploader';
@@ -43,6 +43,12 @@ export default function BackgroundRemover() {
       });
   }, [t.error]);
 
+  const config = useMemo(() => ({
+    output: {
+      quality: 1.0,
+    }
+  }), []);
+
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     setOriginalImage(URL.createObjectURL(file));
@@ -50,7 +56,7 @@ export default function BackgroundRemover() {
     setError(null);
     setIsLoading(true);
 
-    removeBackground(file)
+    removeBackground(file, config)
       .then((blob: Blob) => {
         const url = URL.createObjectURL(blob);
         setProcessedImage(url);
@@ -62,7 +68,7 @@ export default function BackgroundRemover() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [t.error]);
+  }, [t.error, config]);
 
   const handleDownload = () => {
     if (processedImage) {

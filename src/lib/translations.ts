@@ -16,7 +16,7 @@ const translations = {
       starOnGithub: 'Star on GitHub',
       about: 'About',
       contact: 'Contact',
-      aboutContent: 'Background Begone is a simple tool to remove backgrounds from images using AI. The process runs entirely in your browser and device, so your data is safe. PS : That cute logo is made by me.',
+      aboutContent: 'Background Begone is a powerful tool that uses AI to remove image backgrounds instantly. This service is completely free and maintains your image quality. All processing happens locally in your browser, ensuring your data privacy and security. No server uploads required - your images never leave your device.',
       contactContent: 'For any inquiries, please contact me at ifalfahri16@gmail.com or visit my',
     },
     id: {
@@ -33,10 +33,10 @@ const translations = {
       madeWithLove: 'Dibuat dengan',
       love: 'cinta',
       by: 'oleh',
-      starOnGithub: 'Kasih Star di GitHub',
+      starOnGithub: 'Star di GitHub',
       about: 'Tentang',
       contact: 'Kontak',
-      aboutContent: 'Background Begone adalah alat sederhana untuk menghapus latar belakang dari gambar menggunakan AI. Prosesnya berjalan sepenuhnya di browser dan device kalian, jadi data kalian aman. Btw, logonya saya yang buat loh.',
+      aboutContent: 'Background Begone adalah alat sederhana untuk menghapus latar belakang dari gambar menggunakan AI. Website ini sepenuhnya gratis, dan tidak akan menurunkan kualitas gambar kalian. Prosesnya berjalan sepenuhnya di browser dan device kalian, jadi data kalian aman. Btw, logonya saya yang buat loh.',
       contactContent: 'Jika ada pertanyaan, silakan hubungi saya di ifalfahri16@gmail.com atau kunjungi',
     },
   };

@@ -1,4 +1,4 @@
-import { Heart, Github } from "lucide-react";
+import { Heart, Github, HeartHandshake } from "lucide-react";
 import { FooterProps } from "@/lib/types";
 
 const Footer: React.FC<FooterProps> = ({ t }) => (
@@ -21,6 +21,9 @@ const Footer: React.FC<FooterProps> = ({ t }) => (
         </a>
       </p>
       <div className="flex items-center mt-4 sm:mt-0">
+      <HeartHandshake className="h-4 w-4 mr-2" />
+        <a className="hover:underline" href="https://sociabuzz.com/ifalex/support">Support Creator</a>
+        <span className="mx-4">|</span>
         <a
           href="https://github.com/ifalfahri/background-begone"
           target="_blank"

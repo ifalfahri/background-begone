@@ -10,10 +10,10 @@
 
 ## Features ✨
 
-- 🖼️ Upload any image
-- 🔄 In-Browser Background Removal
-- ⬇️ Download processed images
-- 🎯 Data Protection
+- 🖼️ Upload any Image
+- 🆓 Completely Free to Use
+- 💫 Maintains Original Image Quality
+- 🔒 100% Private - All Processing Done Locally
 
 ## Installation 🛠️
 
